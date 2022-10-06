@@ -87,7 +87,19 @@ OFFSET 20;
 -- MICRO DESAFIO PASO 04
 -- BETWENN & LIKE
 
--- Punto 01 - Seleccionar y mostrar tres primeras filas
-SELECT title
+-- Punto 01 - Seleccionar y mostrar por filtro like
+SELECT title, rating
 FROM movies
-LIMIT 3;
+WHERE title LIKE "Harry%"
+;
+
+-- Punto 02 - Seleccionar y mostrar por filtro like
+SELECT first_name, last_name
+FROM actors
+WHERE first_name LIKE "Sam%"
+;
+
+-- Punto 03 - Seleccionar y mostrar por filtro entre fechas
+SELECT title, release_date
+FROM movies
+WHERE release_date BETWEEN "2004-01-01" AND "2008-12-31";
