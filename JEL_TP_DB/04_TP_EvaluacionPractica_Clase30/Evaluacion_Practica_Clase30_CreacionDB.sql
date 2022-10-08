@@ -28,6 +28,16 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `DB_Clase30_Entregable`.`categorias`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `DB_Clase30_Entregable`.`categorias` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `categoria` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `DB_Clase30_Entregable`.`notas`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `DB_Clase30_Entregable`.`notas` (
@@ -38,28 +48,18 @@ CREATE TABLE IF NOT EXISTS `DB_Clase30_Entregable`.`notas` (
   `titulo` VARCHAR(100) NOT NULL,
   `descripcion` TEXT NOT NULL,
   `usuario_id` INT NOT NULL,
+  `categoria_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_notas_usuarios_idx` (`usuario_id` ASC) VISIBLE,
+  INDEX `fk_notas_categorias_idx` (`categoria_id` ASC) VISIBLE,
   CONSTRAINT `fk_notas_usuarios`
     FOREIGN KEY (`usuario_id`)
     REFERENCES `DB_Clase30_Entregable`.`usuarios` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `DB_Clase30_Entregable`.`categorias`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `DB_Clase30_Entregable`.`categorias` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `categoria` VARCHAR(45) NOT NULL,
-  `notas_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_categorias_notas_idx` (`notas_id` ASC) VISIBLE,
-  CONSTRAINT `fk_categorias_notas`
-    FOREIGN KEY (`notas_id`)
-    REFERENCES `DB_Clase30_Entregable`.`notas` (`id`)
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_notas_categorias`
+    FOREIGN KEY (`categoria_id`)
+    REFERENCES `DB_Clase30_Entregable`.`categorias` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
